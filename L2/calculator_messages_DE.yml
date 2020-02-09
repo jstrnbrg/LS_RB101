@@ -1,0 +1,7 @@
+number1: "Erste Nummer eingeben: "
+number2: "Zweite Nummer eingeben: "
+number_error: "Das ist keine Nummer"
+operators: "Mögliche Operationen: (+, -, *, /): "
+operator_error: "Ungültige Operation"
+again: "Möchtest du noch etwas berechnen? (Y um fortzufahren)"
+thanks: "Danke"
