@@ -116,6 +116,73 @@ There are  three answers to the question of what object passing strategy ruby us
 - *Pass by reference* is accurate so long as you account for assignment and immutability.
 - Ruby acts like *pass by value* for immutable objects, *pass by reference* for mutable objects is a reasonable answer when learning about ruby, so long as you keep in mind that ruby only appears to act like this.
 
+### Example
+```
+# Creates a string object with the value 'Bob', stores a reference/pointer to this object in the variable name.
+name = 'Bob'
+
+# Assign to save_name the reference that name holds; now save_name holds a reference to the same object.
+save_name = name
+
+# Create a new string object with the value 'Alice', store a reference to this object in the name variable. (re-assigned)
+name = 'Alice'
+
+
+puts name, save_name
+# Alice
+# Bob
+
+# Creates a string object with the value 'Bob', stores a reference to this object in the variable name.
+name = 'Bob'
+
+# Assign to save_name the reference that name holds; now save_name holds a reference to the same object.
+save_name = name
+
+# Invoke the mutating version of upcase on the object referenced by name.
+# As a result the string (referenced by both name and by save_name) has a value of 'BOB'.
+name.upcase!
+
+
+puts name, save_name
+# BOB
+# BOB
+```
+
+### Example
+```
+# The following code:
+array1 = %w(Moe Larry Curly Shemp Harpo Chico Groucho Zeppo)
+array2 = []
+array1.each { |value| array2 << value }
+array1.each { |value| value.upcase! if value.start_with?('C', 'S') }
+puts array2
+
+# will output:
+
+Moe
+Larry
+CURLY
+SHEMP
+Harpo
+CHICO
+Groucho
+Zeppo
+
+# The key to understanding this output is the line:
+
+array1.each { |value| array2 << value }
+
+# During the iteration over array1, value is being pushed to array2. Value is, in fact, just a reference that points to a string in memory. So, at the end of the iteration, array2 holds a collection of references pointing to the same strings as the references in array1.
+
+# If you were to look at the object_id's of each array, you would see they are identical.
+
+#So when the program iterates the second time:
+
+array1.each { |value| value.upcase! if value.start_with?('C', 'S') }
+
+# upcase! is mutating the string in memory that the references in array1 point to. Since the references in array2 also point to the exact same strings, the changes made when iterating through array1 appear when printing the values in array2
+```
+
 ### Mutability
 - A variable is merely a name for some object.
 - Multiple variables can reference the same object, so modifying an object using a given variable name will be reflected in every other variable that is bound to that object.
@@ -135,3 +202,8 @@ puts number #6
 - Indexed assignment is mutating (whereas normal assignment isn't) e.g. arr[2] = "hi"
 - Concatenation using `<<` is mutating
 - Setter methods are mutating
+
+## Links
+- https://launchschool.com/blog/references-and-mutability-in-ruby
+- https://launchschool.com/blog/mutating-and-non-mutating-methods
+- https://launchschool.com/blog/object-passing-in-ruby
