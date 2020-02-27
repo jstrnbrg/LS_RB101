@@ -79,7 +79,7 @@ def xor(a, b)
   (a || b) && !(a && b)
 end
 
-p xor(true,false)
+# p xor(true,false)
 
 
 # Write a method that returns an Array that contains every other element of an
@@ -90,7 +90,7 @@ def oddities(arr)
   arr.select.with_index {|val, index| index.even?}
 end
 
-p oddities([10,9,8])
+# p oddities([10,9,8])
 
 
 # Write a method that returns true if the string passed as an argument is a palindrome,
@@ -100,6 +100,46 @@ def palindrome?(string)
   string == string.reverse
 end
 
-p palindrome?('madam')
-p palindrome?("madam i'm adam")
-p palindrome?('356653')
+# p palindrome?('madam')
+# p palindrome?("madam i'm adam")
+# p palindrome?('356653')
+
+def palindrome_array(input)
+  steps = input.size / 2
+  count = 1
+  result = true
+  steps.times {
+    bool = input[count - 1] == input[-count]
+    result = bool if bool == false
+    count += 1
+  }
+  result
+end
+
+#p palindrome_array("allo")
+
+
+
+def real_palindrome?(string)
+  string = string.downcase.gsub(/[^a-z0-9]/i, '')
+  palindrome?(string)
+end
+
+# p real_palindrome?('madam')
+# p real_palindrome?('Madam') # (case does not matter)
+# p real_palindrome?("Madam, I'm Adam")# (only alphanumerics matter)
+# p real_palindrome?('356653')
+# p real_palindrome?('356a653')
+# p real_palindrome?('123ab321')
+
+
+# Write a method that returns true if its integer argument is palindromic,
+# false otherwise. A palindromic number reads the same forwards and backwards.
+def palindromic_number?(int)
+  palindrome?(int.to_s)
+end
+
+p palindromic_number?(34543) == true
+p palindromic_number?(123210) == false
+p palindromic_number?(22) == true
+p palindromic_number?(5) == true
