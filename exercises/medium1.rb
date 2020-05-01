@@ -160,4 +160,83 @@ end
 # the word "freight" in it, we won't replace it. If we don't use \b, we would
 # convert "freight" to "fr8".
 
-p word_to_digit('Please call me at five five five one two three four. Thanks.') == 'Please call me at 5 5 5 1 2 3 4. Thanks.'
+#p word_to_digit('Please call me at five five five one two three four. Thanks.') == 'Please call me at 5 5 5 1 2 3 4. Thanks.'
+
+# The Fibonacci series is a sequence of numbers starting with 1 and 1 where each
+# number is the sum of the two previous numbers: the 3rd Fibonacci number is
+# 1 + 1 = 2, the 4th is 1 + 2 = 3, the 5th is 2 + 3 = 5, and so on.
+# In mathematical terms:
+#F(1) = 1
+#F(2) = 1
+#F(n) = F(n - 1) + F(n - 2) where n > 2
+
+# Write a recursive method that computes the nth Fibonacci number, where nth is
+# an argument to the method.
+def fibonacci(n)
+  return 1 if n <= 2
+  fibonacci(n-1) + fibonacci(n-2)
+end
+
+# p fibonacci(1) == 1
+# p fibonacci(2) == 1
+# p fibonacci(3) == 2
+# p fibonacci(4) == 3
+# p fibonacci(5) == 5
+# p fibonacci(12) == 144
+# p fibonacci(20) == 6765
+
+
+
+# Rewrite your recursive fibonacci method so that it computes its results
+# without recursion.
+def fibonacci(n)
+  fib_arr = []
+  n.times do
+    fib_arr.size < 2 ? fib_arr << 1 : fib_arr << fib_arr[-1] + fib_arr[-2]
+  end
+  fib_arr[-1]
+end
+
+def fib_fast(n)
+  first, last = [1, 1]
+  3.upto(n) do
+    first, last = [last, first + last]
+  end
+  last
+end
+
+# p fibonacci(1) == 1
+# p fibonacci(2) == 1
+# p fibonacci(3) == 2
+# p fibonacci(4) == 3
+# p fibonacci(5) == 5
+# p fibonacci(12) == 144
+# p fibonacci(20) == 6765
+
+
+# In the previous exercise, we developed a procedural method for computing the
+# value of the nth Fibonacci numbers. This method was really fast, computing
+# the 20899 digit 100,001st Fibonacci sequence almost instantly.
+
+# In this exercise, you are going to compute a method that returns the last
+# digit of the nth Fibonacci number.
+def fibonacci_last(n)
+  fib_num = fib_fast(n)
+  fib_num.to_s[-1].to_i
+end
+
+def fibonacci_last_fast(nth)
+  last_2 = [1, 1]
+  3.upto(nth) do
+    last_2 = [last_2.last, (last_2.first + last_2.last) % 10]
+  end
+
+  last_2.last
+end
+
+p fibonacci_last_fast(15)        # -> 0  (the 15th Fibonacci number is 610)
+p fibonacci_last_fast(20)        # -> 5 (the 20th Fibonacci number is 6765)
+p fibonacci_last_fast(100)       # -> 5 (the 100th Fibonacci number is 354224848179261915075)
+p fibonacci_last_fast(100_001)   # -> 1 (this is a 20899 digit number)
+p fibonacci_last_fast(1_000_007) # -> 3 (this is a 208989 digit number)
+p fibonacci_last_fast(123456789) # -> 4

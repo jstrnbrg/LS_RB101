@@ -1,16 +1,27 @@
-## Lesson 2 notes
+---
+layout: post
+title: "RB101: Scope & Mutability"
+description: "Notes from the first module of the Launch School core curriculum"
+date: 2020-02-14
+feature_image:
+tags: [learning, launch-school]
+---
 
-### Truthiness
-- Ruby is a very liberal language and considers everything to be truthy other than false and nil.
-- An expression that Ruby considers true is not the same as the true object.
 
+## Truthiness
+- In Ruby, every value apart from false and nil, evaluates to true in a boolean context.
+- We can therefore say that in Ruby, every value apart from false and nil is truthy.
+- We can also say that false and nil are falsey.
+- This is not the same as saying every value apart from false and nil is true, or is equal to true.
 
-### Imperative vs declarative
+## Imperative vs declarative
 - Imperative: concerned with "HOW" you’re going to do something. Lists the raw steps.
 - Declarative: concerned with the higher level "WHAT" you're trying to do. Abstraction.
 
+<!--more-->
 
-### Debugging
+
+## Debugging
 1. Reproduce the Error: You need a deterministic way to consistently reproduce the problem, and only then can you start to isolate the root cause.
 2. Determine the Boundaries of the Error: Try to modify the data or code to get an idea of the scope of the error and determine the boundaries of the problem. Most problems can be solved in many ways, and the deeper you understand the problem, the more holistic solution you can come up with.
 3. Find the origin of the problem
@@ -18,7 +29,7 @@
 5. Implement a fix
 6. Text the fix
 
-### Coding tips
+## Coding tips
 - Use descriptive variable names
 - In Ruby, make sure to use snake_case when naming everything, except classes which are CamelCase or constants, which are all UPPERCASE.
 - Don't mutate CONSTANTS.
@@ -42,18 +53,20 @@ numbers.each {|x| numbers.delete(x)}
 ### Local variable scope
 - A local variable's scope is determined by where it is initialized.
 - Local variables initialized in an outer scope can be accessed in an inner scope, but not vice versa.
-- You can change outside local variables from within inner scope and have that change affect the outer scope.
+- You can mutate outside local variables from within inner scope and have that change affect the outer scope.
 - Local variable scope is defined by a block.
 - A block is a piece of code following a *method invocation*, usually delimited by either curly braces {} or do/end. e.g. {...} following a `for` loop is not a new block as that isn't a method invocation, whereas {...} following `.times` is a new block.
 -  A method definition `def ...` has no notion of "outer" or "inner" scope -- you must explicitly pass in any parameters to a method definition.
 
 
 ### Method definition & invocation
-- Method definition is when, within our code, we define a Ruby method using the def keyword.
+- Method definition is when, within our code, we define a Ruby method using the `def` keyword.
 - Method invocation is when we call a method.
-- Method invocation followed by {..} or do..end defines a block; the block is part of the method invocation.
+- Method invocation followed by ``{..}`` or `do..end` defines a block; the block is part of the method invocation.
 - Essentially the block acts as an argument to the method. In the same way that a local variable can be passed as an argument to a method at invocation, when a method is called with a block it acts as an argument to that method.
-#### Passing arguments to a method: Can be ignored or used
+
+### Passing arguments to a method: Can be ignored or used
+
 ```
 def greetings(str)
   puts "Goodbye"
@@ -74,7 +87,9 @@ greetings2(word)
 # Outputs 'Hello'
 # Outputs 'Goodbye'
 ```
-#### Passing a block to a method: Can be ignored or used
+
+### Passing a block to a method: Can be ignored or used
+
 ```
 def greetings
   puts "Goodbye"
@@ -188,6 +203,7 @@ array1.each { |value| value.upcase! if value.start_with?('C', 'S') }
 - Multiple variables can reference the same object, so modifying an object using a given variable name will be reflected in every other variable that is bound to that object.
 - Objects can be either mutable or immutable. Mutable objects can be changed; immutable objects cannot be changed.
 - In Ruby, numbers and boolean values are immutable.
+
 ```
 number = 3
 puts number #3
@@ -195,9 +211,10 @@ puts number #3
 number = number * 2
 puts number #6
 ```
+
 - This did not mutate the original number object. Instead number was re-assigned to a new integer object with the value of 6. This disconnected the original object from the variable, which makes it available for garbage collection unless another reference to the object exists elsewhere.
 
-#### Mutating methods
+### Mutating methods
 - Most mutating methods have a `!` at the end if their name, not all though.
 - Indexed assignment is mutating (whereas normal assignment isn't) e.g. arr[2] = "hi"
 - Concatenation using `<<` is mutating

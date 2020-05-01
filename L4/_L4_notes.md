@@ -1,4 +1,12 @@
-# Collections
+---
+layout: post
+title: "RB101: Collections & Looping"
+description: "Notes from the first module of the Launch School core curriculum"
+date: 2020-02-14
+feature_image:
+tags: [learning, launch-school]
+---
+
 ## Element reference
 ### String element reference
 - integer-based index that represents each character in the string.
@@ -9,6 +17,8 @@ str[2, 3] # [starting index, number of chars] => "cde"
 str[2, 3][0] # => chaining: str[2, 3] = > "cde", "cde"[0] => "c"
 ```
 - using str[start_index, number of chars] is idential to str.slice(start_index, number of chars)
+
+<!--more-->
 
 ### Array element reference  
 - Arrays are lists of elements that are ordered by index, where each element can be any object.
@@ -38,7 +48,7 @@ hsh['fruit'][0] # => "a"
 - This is not necessarily a problem for a string, since we know that nil is an invalid return value; with an array, nil could be a valid return value since arrays can contain any other type of object, including nil. Therefore use: `arr.fetch(3) #returns IndexError if out of index`
 
 
-#### Negative Indices
+### Negative Indices
 - Elements in String and Array objects can be referenced using negative indices, starting from the last index in the collection -1 and working backwards.
 - Negative indexes can also be out of bounds, they don't loop back over
 
@@ -75,7 +85,7 @@ hsh[:apple] = 'Fruit'
 hsh # => { :apple => "Fruit", :carrot => "Produce", :pear => "Produce", :broccoli => "Produce" }
 ```
 
-# Looping
+## Looping
 - In Ruby, a simple loop is created by calling the Kernel#loop method and passing a block to it.
 - `break` exits the loop
 - When `next` is executed, it tells the loop to skip the rest of the current iteration and begin the next one
@@ -83,29 +93,29 @@ hsh # => { :apple => "Fruit", :carrot => "Produce", :pear => "Produce", :broccol
 - When break is placed on the first line within the loop it mimics the behavior of a "while" loop. With a "while" loop, the code below `break` may or may not execute at all, depending on the condition.
 - Looping comprises four basic elements: a loop, a counter, a way to retrieve the current value, and a way to exit the loop.
 
-# PEDAC
+## PEDAC
 - P - [Understand the] Problem
 - E - Examples / Test cases
 - D - Data Structure
 - A - Algorithm
 - C - Code
 
-## Understanding the Problem
+### Understanding the Problem
 1. Read the problem description.
 2. Check the test cases, if any.
 3. If any part of the problem is unclear, ask the interviewer or problem requester to clarify the matter.
 
-## Data structures and Algorithm
+### Data structures and Algorithm
 4. Write down input, output, explicit and Implicit rules
 5. Write pseudocode
 
 
-# Selection and Transformation
+## Selection and Transformation
 - Selection is picking certain elements out of the collection depending on some criterion.
 - Transformation, on the other hand, refers to manipulating every element in the collection.
 - When performing transformation, it's always important to pay attention to whether the original collection was mutated or if a new collection was returned.
 
-## Methods
+### Methods
 - `.each` more elegant way to iterate over collection.
 - `.each` over arrays need one parameter (value).
 - `.each` over hashes need one parameter (key, value).
@@ -113,8 +123,8 @@ hsh # => { :apple => "Fruit", :carrot => "Produce", :pear => "Produce", :broccol
 - `.select`returns a new collection containing all elements that fulfilled the criteria.
 - `.select` uses the return of the block (i.e. the return value of the last expression in the block) to decide if the current element should be added to the returned collection or not. e.g. if the last expression in the block is `puts x` then no element will be added as `puts x` always returns `nil`
 - `.map` places the return value of the block in the new collection that will be returned.
-- `.any?` returns try if the block's return value in at least one iteration is truthy ( (like || statement )
-- `.all?` returns try if the block's return value in every iteration is truthy ( (like && statement )
+- `.any?` returns true if the block's return value in at least one iteration is truthy ( (like || statement )
+- `.all?` returns true if the block's return value in every iteration is truthy ( (like && statement )
 - Enumerable#first(num), num is optional, returns the first elements in the collection.
 - Enumerable#each_with_index, on arrays the first argument is the current value and the second the index, on hashes the first argument represents the pair and the second the index
 - Enumerable#include?(arg) returns true if arg is in enumerable, called on a hash, it checks if the key exists not if the value exists.

@@ -1,10 +1,19 @@
-# Sorting
-## The <=> Method
+---
+layout: post
+title: "RB101: Sorting & Nested data structures"
+description: "Notes from the first module of the Launch School core curriculum"
+date: 2020-02-14
+feature_image:
+tags: [learning, launch-school]
+---
+
+## The <=> comparison method
 - Any object in a collection that we want to sort must implement a <=> method.
 - This method performs comparison between two objects of the same type and returns a -1, 0, or 1, depending on whether the first object is less than, equal to, or greater than the second object.
 - If the two objects cannot be compared then nil is returned
 - The return value of the ``<=>`` method is used by sort to determine the order in which to place the items.
 
+<!--more-->
 
 ## ASCII
 - use `.ord` to get characters ASCII number
@@ -23,13 +32,13 @@ end
 ```
 
 
-# Nested data structures
+## Nested data structures
 - `arr = [[1, 3], [2]]` array contains 2 nested arrays
 - `arr[0] # => [1,3]`
 - `arr[0][1] # => 3`
 
 
-## Updating collection elements
+### Updating collection elements
 - updating an element in a collection mutates the caller / destructive
 ```
 arr = [[1, 3], [2]]
@@ -37,8 +46,9 @@ arr[1] = "hi there"
 arr  # => [[1, 3], "hi there"]
 ```
 
-## Appending to an inner array
-- `arr[0] << 3` is element reference (`arr[0]` which returns `[1]`) and `<< 3` appends 3
+### Appending to an inner array
+- `arr[0] << 3` is element reference (`arr[0]` which returns `[1]`) and `<< 3` appends 3 to that inner list.
+
 ```
 arr = [[1], [2]]
 
@@ -46,7 +56,7 @@ arr[0] << 3
 arr # => [[1, 3], [2]]
 ```
 
-## Examples
+### Examples
 ```
 arr = [['a', ['b']], { b: 'bear', c: 'cat' }, 'cab']
 
@@ -58,10 +68,11 @@ arr[1][:b][0]       # => "b"
 arr[2][2]           # => "b"
 ```
 
-## Shallow Copy
+### Shallow Copy
 - when we want to save the original collection before performing some major modifications
 - Both `.dup` and `.clone` create a shallow copy of an object.
 - "Shallow" means that only the object that the method is called on is copied, but not nested objects inside, *nested objects will be shared.*
+
 ```
 # Example 1
 arr1 = ["a", "b", "c"]
@@ -84,11 +95,12 @@ end
 arr1 # => ["A", "B", "C"]
 arr2 # => ["A", "B", "C"]
 ```
+
 - In example 1, only arr 2 is modified since the destructive method `.map!` is called on the copied object itself, i.e. the array and not on the individual elements.
 - In example 2, both arrays are modified as the destructive method `.upcase!` is called on the individual elements which are shared between the two copies.
 
 
-## Freezing objects
+### Freezing objects
 - Objects can be frozen in order to prevent them from being modified using `.freeze`
 - Only mutable objects can be frozen because immutable objects, like integers, are already frozen.
 - We can check if an object is frozen with the `frozen?` method.
@@ -96,7 +108,7 @@ arr2 # => ["A", "B", "C"]
 - The difference between `.dup` and `.clone` is that clone preserves the frozen state of an object.
 
 
-# Remember:
+## Remember:
 - Do not mutate the collection that you're iterating through, make a copy, iterate through copy and mutate original.
 - When analysing code, go line by line and pay attention to the:
    - *action*
